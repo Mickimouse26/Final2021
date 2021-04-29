@@ -24,10 +24,39 @@ A new  preventative vaccine (covid91) is under test in clinical trials. Given th
 
 # Methods
 
+The first step is isolating the subpopulations
+
+```{r}
+maledata <- filter(FinalData, sex=="guy")
+maledata$sex <- as.factor(maledata$sex)
+```
+
 # Males
+
+## Bar Chart
+
+
+```{r}
+Males <- maledata %>% group_by(sex,infected) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(Males,aes(x=sex,y=count,fill=infected))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(Males,aes(x=sex,y=prcnt*100,fill=infected)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
 
 # Females
 
 # LGBTQ
 
 # DrugUser
+
+# Discussion & Conclusion
+
+
