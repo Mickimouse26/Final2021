@@ -16,7 +16,13 @@ require(forcats)
 OldData <-read.csv(file="covid91.csv",header=TRUE)
 #recode to remove the annoying "X" from the dataframe
 FinalData <- OldData %>% mutate(infected = recode(infected, aids = "covid", none = "OK" )) %>% select(-one_of("X"))
+FinalData= select(FinalData, ! is.numeric)
+FinalData=purrr::map(FinalData, as.factor)
+FinalData = data.frame(FinalData) 
+FinalData$infected=relevel(FinalData$infected,"OK")
 ```
+
+
 
 # Introduction
 
@@ -28,7 +34,7 @@ The first step is isolating the subpopulations
 
 ```{r}
 maledata <- filter(FinalData, sex=="guy")
-maledata$sex <- as.factor(maledata$sex)
+
 ```
 
 # Males
@@ -49,6 +55,22 @@ basicC + geom_bar(stat="identity",position="dodge")
 
 basicCC <- ggplot(Males,aes(x=infected,y=prcnt*100,fill=treatment)) 
 basicCC + geom_bar(stat="identity", position = "dodge")
+```
+This Bar Chart appears to show that approximately 340 people were infected with Covid-19 57% of the males who had Covid were given the drug, and about 43% that were infected got the placebo.
+
+## Numerial Summary
+
+```{r}
+table1 <- xtabs(~treatment + infected, data=maledata)
+rowPerc(table1)
+colPerc(table1)
+print(table1)
+```
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
 ```
 
 
