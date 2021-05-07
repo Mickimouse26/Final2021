@@ -128,16 +128,78 @@ chisq.test(table2)
 chisqtestGC(table2)
 fisher.test(table2)
 ```
-
+The value is 67% effective in Females.
 
 
 # LGBTQ
 
+```{r}
+LGBTQdata <- filter(FinalData, sex=="gay")
+LGBTQdata$sex <- as.factor(LGBTQdata$sex)
+```
+
+## Barcart
+
+```{r}
+LGBTQ <- LGBTQdata %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
 
 
+# the group_by followed by summarize(count=n())
 
+basicC <- ggplot(LGBTQ,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+
+#Now for percentage plot
+
+basicCC <- ggplot(LGBTQ,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+
+### Numerical Summaries  
+
+```{r}
+table3 <- xtabs(~treatment + infected, data=DrugUserdata)
+rowPerc(table3)
+colPerc(table3)
+print(table3)
+```
+
+## Inferential  
+
+```{r}
+chisq.test(table3)
+chisqtestGC(table3)
+fisher.test(table3)
+
+```
 
 # DrugUser
+
+```{r}
+DrugUserdata <- filter(FinalData, sex=="gay")
+DrugUserdata$sex <- as.factor(DrugUserdata$sex)
+```
+
+
+## Barcart
+
+```{r}
+DrugUser <- DrugUserdata %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(DrugUser,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+
+#Now for percentage plot
+
+basicCC <- ggplot(DrugUser,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
 
 
 
