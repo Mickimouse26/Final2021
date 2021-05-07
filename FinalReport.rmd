@@ -84,15 +84,66 @@ Therefore, we reject the null hypothesis
 
 The Fisher Exact test odds ratio in 0.68
 
+Ultimately the vaccine is 40% effective in the Male population, which is absolutely ineffective.
 
 # Females
+
+
+```{r}
+Femaledata <- filter(FinalData, sex=="gal")
+Femaledata$sex <- as.factor(Femaledata$sex)
+```
+
+## Barcart
+
+```{r}
+Females <- Femaledata %>% group_by(infected,treatment) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(Females,aes(x=infected,y=count,fill=treatment))
+basicC + geom_bar(stat="identity",position="dodge")
+
+
+#Now for percentage plot
+
+basicCC <- ggplot(Females,aes(x=infected,y=prcnt*100,fill=treatment)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+### Numerical Summaries  
+
+```{r}
+table2 <- xtabs(~treatment + infected, data=Femaledata)
+rowPerc(table2)
+colPerc(table2)
+print(table2)
+```
+
+## Inferential  
+
+```{r}
+chisq.test(table2)
+chisqtestGC(table2)
+fisher.test(table2)
+```
 
 
 
 # LGBTQ
 
+
+
+
+
 # DrugUser
 
+
+
+
 # Discussion & Conclusion
+
+
 
 
