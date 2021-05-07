@@ -66,13 +66,23 @@ rowPerc(table1)
 colPerc(table1)
 print(table1)
 ```
+The table 
+
 
 ```{r}
 chisq.test(table1)
 chisqtestGC(table1)
 fisher.test(table1)
 ```
+The p-value is so small at 0.00006181 that is highly unlikely that the results were by chance.
 
+The Null hypothesis is that the vaccine makes no difference in the Male population when it comes to contracting Covid-19.
+
+The alternative hypothesis is that the vaccine in face does make a differnce in whether or not a Male contract Covid-19
+
+Therefore, we reject the null hypothesis
+
+The Fisher Exact test odds ratio in 0.68
 
 
 # Females
