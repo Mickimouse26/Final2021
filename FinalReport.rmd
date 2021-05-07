@@ -134,7 +134,7 @@ The value is 67% effective in Females.
 # LGBTQ
 
 ```{r}
-LGBTQdata <- filter(FinalData, sex=="gay")
+LGBTQdata <- filter(FinalData, LGBTQ=="gay")
 LGBTQdata$sex <- as.factor(LGBTQdata$sex)
 ```
 
@@ -160,7 +160,7 @@ basicCC + geom_bar(stat="identity", position = "dodge")
 ### Numerical Summaries  
 
 ```{r}
-table3 <- xtabs(~treatment + infected, data=DrugUserdata)
+table3 <- xtabs(~treatment + infected, data=LGBTQdata)
 rowPerc(table3)
 colPerc(table3)
 print(table3)
@@ -178,8 +178,8 @@ fisher.test(table3)
 # DrugUser
 
 ```{r}
-DrugUserdata <- filter(FinalData, sex=="gay")
-DrugUserdata$sex <- as.factor(DrugUserdata$sex)
+DrugUserdata <- filter(FinalData, DrugUser=="yes")
+DrugUserdata$DrugUser <- as.factor(DrugUserdata$DrugUser)
 ```
 
 
