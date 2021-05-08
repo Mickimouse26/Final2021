@@ -114,6 +114,9 @@ basicCC <- ggplot(Females,aes(x=infected,y=prcnt*100,fill=treatment))
 basicCC + geom_bar(stat="identity", position = "dodge")
 ```
 
+This barchart shows that out of the approximately....Females who were infected with Covid-19, 32% were given the drug, and 66% were given placebo.
+
+
 ### Numerical Summaries  
 
 ```{r}
@@ -177,6 +180,10 @@ fisher.test(table3)
 
 ```
 
+The vaccine is not effective in the LGBTQ population, it is only 29% effective.
+
+
+
 # DrugUser
 
 ```{r}
@@ -221,11 +228,11 @@ fisher.test(table4)
 
 ```
 
-
+The vaccine is 60% effective in the Druggie population.
 
 
 # Discussion & Conclusion
 
-
+We looked at 4 populations, we found that the two populations that had the highest rate of effectiveness were the Females at 67% and the DrugUsers at 60%. Both the Male population and the LGBTQ populations showed that the vaccine was not beneficial to them and were ineffective in protecting them from contracting Covid-19, and Males had a 40% effectiveness, while the LGBTQ had 29% effectiveness, which is not at all effective.
 
 
